@@ -1,0 +1,131 @@
+package pe.edu.upc.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import pe.edu.upc.entity.JaleApp;
+import pe.edu.upc.entity.Pasajero;
+import pe.edu.upc.service.IJaleAppService;
+import pe.edu.upc.service.IPasajeroService;
+
+@Named
+@RequestScoped
+public class PasajeroController {
+
+	// Service
+	@Inject
+	private IPasajeroService sPasajero;
+	@Inject
+	private IJaleAppService jService;
+
+	// atributos
+
+	private Pasajero pasajero;
+	private JaleApp jale;
+	List<Pasajero> listaPasajero;
+	List<JaleApp> listaUsuario;
+
+	@PostConstruct
+	public void init() {
+
+		this.jale = new JaleApp();
+		this.pasajero = new Pasajero();
+		this.listaUsuario = new ArrayList<JaleApp>();
+		this.listaPasajero = new ArrayList<Pasajero>();
+		this.listarUsuario();
+		this.listarPasajero();
+	}
+
+	// metodos
+	public String nuevoPasajero() {
+		this.setPasajero(new Pasajero());
+		return "pasajero.xhtml";
+	}
+
+	public void insert() {
+
+		try {
+
+			sPasajero.insert(pasajero);
+
+		} catch (Exception e) {
+			System.out.println("Error al insertar en el controller de pasajaero");
+		}
+
+	}
+
+	public void listarUsuario() {
+		try {
+
+			listaUsuario = jService.list();
+
+		} catch (Exception e) {
+			System.out.println("Error al listar usuarios en el controller de pasajaero");
+		}
+
+	}
+
+	public void listarPasajero() {
+		try {
+
+			listaPasajero = sPasajero.list();
+
+		} catch (Exception e) {
+			System.out.println("Error al listar pasajero en el controller de pasajaero");
+		}
+
+	}
+
+	public void eliminar(Pasajero pasajero) {
+
+		try {
+
+			sPasajero.delete(pasajero.getidPasajero());
+			this.listarPasajero();
+
+		} catch (Exception e) {
+			System.out.println("Error al eliminar pasajero en el controller de pasajaero");
+		}
+
+	}
+
+	// get and set
+
+	public Pasajero getPasajero() {
+		return pasajero;
+	}
+
+	public void setPasajero(Pasajero pasajero) {
+		this.pasajero = pasajero;
+	}
+
+	public JaleApp getJale() {
+		return jale;
+	}
+
+	public void setJale(JaleApp jale) {
+		this.jale = jale;
+	}
+
+	public List<Pasajero> getListaPasajero() {
+		return listaPasajero;
+	}
+
+	public void setListaPasajero(List<Pasajero> listaPasajero) {
+		this.listaPasajero = listaPasajero;
+	}
+
+	public List<JaleApp> getListaUsuario() {
+		return listaUsuario;
+	}
+
+	public void setListaUsuario(List<JaleApp> listaUsuario) {
+		this.listaUsuario = listaUsuario;
+	}
+
+}
