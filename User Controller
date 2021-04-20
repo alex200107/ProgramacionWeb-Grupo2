@@ -1,0 +1,92 @@
+package pe.edu.upc.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import pe.edu.upc.entity.JaleApp;
+import pe.edu.upc.service.IJaleAppService;
+
+@Named
+@RequestScoped
+public class JaleAppController {
+	@Inject
+	private IJaleAppService jaService;
+
+//atributos	
+	private JaleApp jale;
+	List<JaleApp> listaUsers;
+
+//Constructors
+	@PostConstruct
+	public void init() {
+		this.listaUsers = new ArrayList<JaleApp>();
+		this.jale = new JaleApp();
+		this.listar();
+	}
+
+//metodos
+	public String nuevoJaleApp() {
+
+		this.setJale(new JaleApp());
+		return "jaleApp.xhtml";
+	}
+
+	public void insert() {
+
+		try {
+
+			jaService.insert(jale);
+
+		} catch (Exception e) {
+			System.out.println("Error al insertar en el controller de Jale App");
+		}
+	}
+
+	public void listar() {
+
+		try {
+
+			listaUsers = jaService.list();
+
+		} catch (Exception e) {
+			System.out.println("Error al listar en el controller de Jale App");
+		}
+
+	}
+
+	public void eliminar(JaleApp jale) {
+
+		try {
+
+			jaService.delete(jale.getDniUser());
+			this.listar();
+
+		} catch (Exception e) {
+			System.out.println("Error al eliminar en el controller de Jale App");
+		}
+
+	}
+
+//Getters y Setters	
+	public JaleApp getJale() {
+		return jale;
+	}
+
+	public void setJale(JaleApp jale) {
+		this.jale = jale;
+	}
+
+	public List<JaleApp> getListaUsers() {
+		return listaUsers;
+	}
+
+	public void setListaUsers(List<JaleApp> listaUsers) {
+		this.listaUsers = listaUsers;
+	}
+
+}
