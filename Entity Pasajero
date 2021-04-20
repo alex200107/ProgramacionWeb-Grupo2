@@ -1,0 +1,89 @@
+package pe.edu.upc.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Pasajero")
+
+public class Pasajero {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idPasajero;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "dniUser", nullable = false)
+	private JaleApp jaleApp;
+	@Column(name = "ncuentaPasajero", nullable = false)
+	private int ncuentaPasajero;
+	@Column(name = "saldoFavorPasajero", nullable = false)
+	private int saldoFavorPasajero;
+	@Column(name = "saldoAdeudadoPasajero", nullable = false)
+	private int saldoAdeudadoPasajero;
+
+	// constructor with parameters
+	public Pasajero() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	// Constructor without parameters
+
+	public Pasajero(JaleApp jaleApp, int ncuentaPasajero, int saldoFavorPasajero, int saldoAdeudadoPasajero) {
+		super();
+		this.jaleApp = jaleApp;
+		this.ncuentaPasajero = ncuentaPasajero;
+		this.saldoFavorPasajero = saldoFavorPasajero;
+		this.saldoAdeudadoPasajero = saldoAdeudadoPasajero;
+	}
+
+	// get and set of attributes
+
+	public int getidPasajero() {
+		return idPasajero;
+	}
+
+	public void setidPasajero(int idPasajero) {
+		this.idPasajero = idPasajero;
+	}
+	
+	public JaleApp getJaleApp() {
+		return jaleApp;
+	}
+
+	public void setJaleApp(JaleApp jaleApp) {
+		this.jaleApp = jaleApp;
+	}
+
+	public int getNcuentaPasajero() {
+		return ncuentaPasajero;
+	}
+
+	public void setNcuentaPasajero(int ncuentaPasajero) {
+		this.ncuentaPasajero = ncuentaPasajero;
+	}
+
+	public int getSaldoFavorPasajero() {
+		return saldoFavorPasajero;
+	}
+
+	public void setSaldoFavorPasajero(int saldoFavorPasajero) {
+		this.saldoFavorPasajero = saldoFavorPasajero;
+	}
+
+	public int getSaldoAdeudadoPasajero() {
+		return saldoAdeudadoPasajero;
+	}
+
+	public void setSaldoAdeudadoPasajero(int saldoAdeudadoPasajero) {
+		this.saldoAdeudadoPasajero = saldoAdeudadoPasajero;
+	}
+
+}
