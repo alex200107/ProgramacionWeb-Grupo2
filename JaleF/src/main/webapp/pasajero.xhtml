@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"> <ui:composition
+	template="master.xhtml">
+
+	<ui:define name="title">
+        .:Registro de Pasajeros:.
+    </ui:define>
+
+	<ui:define name="titleCont">
+		<span>Pasajeros</span>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<h:outputLabel for="idPasajero" value="Id "
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="idPasajero"
+				styleClass="form-control"
+				value="#{pasajeroController.pasajero.idPasajero}" required="true" />
+
+
+			<h:outputLabel for="ncuentaPasajero" value="Cuenta Pasajero"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="ncuentaPasajero"
+				styleClass="form-control"
+				value="#{pasajeroController.pasajero.ncuentaPasajero}"
+				maxlength="30" required="true" />
+			<br />
+			<h:outputLabel for="saldoFavorPasajero" value="Saldo Pasajero"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="saldoFavorPasajero"
+				styleClass="form-control"
+				value="#{pasajeroController.pasajero.saldoFavorPasajero}"
+				maxlength="30" required="true" />
+			<br />
+			<h:outputLabel for="saldoAdeudadoPasajero" value="Deuda Pasajero"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="saldoAdeudadoPasajero"
+				styleClass="form-control"
+				value="#{pasajeroController.pasajero.saldoAdeudadoPasajero}"
+				maxlength="30" required="true" />
+			<br />
+
+			<p:outputLabel for="cboJaleApp" value="Jale App" />
+
+
+			<p:selectOneMenu id="cboJaleApp"
+				value="#{pasajeroController.pasajero.jaleApp}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{pasajeroController.listaUsuario}" var="m"
+					itemLabel="#{m.nameUser}" itemValue="#{m}" />
+			</p:selectOneMenu>
+			<br />
+
+
+			<p:commandButton value="Grabar"
+				actionListener="#{pasajeroController.insert()}"
+				styleClass="btn btn-primary " update="@form"
+				action="listPasajero?faces-redirect=true" />
+			<p:commandButton value="Cancelar"
+				action="listPasajero?faces-redirect=true" immediate="true"
+				styleClass="btn btn-default" ajax="false" />
+		</h:form>
+	</ui:define>
+
+	<ui:define name="footerCont">
+
+	</ui:define>
+</ui:composition> </html>

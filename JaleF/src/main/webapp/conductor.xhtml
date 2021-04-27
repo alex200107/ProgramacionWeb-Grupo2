@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"> <ui:composition
+	template="master.xhtml">
+
+	<ui:define name="title">
+        .:Registro de Conductores:.
+    </ui:define>
+
+	<ui:define name="titleCont">
+		<span>Conductor</span>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<h:outputLabel for="idPasajero" value="Id "
+				styleClass="control-label" />
+
+			<p:selectOneMenu id="cboJaleApp"
+				value="#{JaleFController.user.jaleFController}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{JaleConController.listaUsuario}" var="m"
+					itemLabel="#{m.nameUser}" itemValue="#{m}" />
+			</p:selectOneMenu>
+
+
+			<h:outputLabel for="TDescripcion" value="Descripcion Conductorr"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="TDescripcion"
+				styleClass="form-control"
+				value="#{JaleConController.condu.Tdescripcion}"
+				maxlength="45" required="true" />
+			<br />
+			<h:outputLabel for="ncuentaConductor" value="Cuenta Conductor"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="ncuentaConductor"
+				styleClass="form-control"
+				value="#{JaleConController.condu.numCuenta}"
+				maxlength="30" required="true" />
+			<br />
+			<h:outputLabel for="saldoConductor" value="Saldo Conductor"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="saldoConductor"
+				styleClass="form-control"
+				value="#{JaleConController.condu.Msaldo}"
+				maxlength="30" required="true" />
+			<br />
+
+		
+
+
+			<p:commandButton value="Grabar"
+				actionListener="#{JaleConController.insertar()}"
+				styleClass="btn btn-primary " update="@form"
+				action="listconductor?faces-redirect=true" />
+			<p:commandButton value="Cancelar"
+				action="listconductor?faces-redirect=true" immediate="true"
+				styleClass="btn btn-default" ajax="false" />
+		</h:form>
+	</ui:define>
+
+	<ui:define name="footerCont">
+
+	</ui:define>
+</ui:composition> </html>
